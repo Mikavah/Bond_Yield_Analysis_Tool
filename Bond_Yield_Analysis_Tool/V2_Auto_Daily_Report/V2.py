@@ -3,9 +3,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime
-import tushare as ts  # 免费财经数据接口
+import tushare as ts  # 财经数据接口
 
-# 解决中文乱码（你验证过的配置）
+# 解决中文乱码
 plt.style.use('seaborn-v0_8-whitegrid')
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
@@ -17,8 +17,8 @@ def get_bond_yield_data():
     拉取中债登实时国债/国开债收益率数据（用tushare标准接口）
     返回：整理后的DataFrame
     """
-    # 1. 设置tushare token（替换成你的token）
-    ts.set_token('e365f6d0f903c494773529a661d97db3702b770dc9156aa51b25fe5a')  # 这里替换成你复制的token
+    # 1. 设置tushare token（替换成个人token）
+    ts.set_token('替换成自己的token')  # 这里替换成你复制的token
     pro = ts.pro_api()
 
     # 2. 拉取国债收益率数据（改用tushare标准接口：cbond_yield）
@@ -72,7 +72,7 @@ def generate_trading_report(df):
     gov_bond = df[df['类型'] == '国债'].reset_index(drop=True)
     cdb_bond = df[df['类型'] == '国开债'].reset_index(drop=True)
 
-    # 1. 画图（专业研报风格）
+    # 1. 画图
     fig, ax = plt.subplots(figsize=(14, 8), facecolor='white')
     ax.set_facecolor('#F8F9FA')
 
@@ -120,7 +120,7 @@ def generate_trading_report(df):
     spread_gov_10y_1y = gov_10y - gov_1y  # 国债10Y-1Y利差
     spread_cdb_30y_10y = cdb_30y - cdb_10y  # 国开30Y-10Y利差
 
-    # 3. 生成文字分析（交易员话术）
+    # 3. 生成文字分析
     report_content = f"""
 # 固收交易日报（{today}）
 ## 一、核心收益率数据
